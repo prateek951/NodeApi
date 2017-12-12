@@ -3,10 +3,15 @@ const app = express();
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 //CROSS ORIGIN RESOURCE SHARING
-const cors = require('cors');
+const mongoose = require('mongoose');
 
 const products = require('./api/routes/products');
 const orders = require('./api/routes/orders');
+
+mongoose.connect('mongodb://node-shop:' + process.env.MONGO_ATLAST_PW + '@node-restapi-shop-shard-00-00-3wuq3.mongodb.net:27017,node-restapi-shop-shard-00-01-3wuq3.mongodb.net:27017,node-restapi-shop-shard-00-02-3wuq3.mongodb.net:27017/test?ssl=true&replicaSet=node-restapi-shop-shard-0&authSource=admin',{
+	useMongoClient : true
+});
+
 
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({extended : false}));
