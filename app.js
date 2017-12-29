@@ -8,6 +8,7 @@ const mongoose = require('mongoose');
 
 const products = require('./api/routes/products');
 const orders = require('./api/routes/orders');
+const user = require('./api/routes/user');
 
 mongoose.connect('mongodb://node-shop:' + process.env.MONGO_ATLAST_PW + '@node-restapi-shop-shard-00-00-3wuq3.mongodb.net:27017,node-restapi-shop-shard-00-01-3wuq3.mongodb.net:27017,node-restapi-shop-shard-00-02-3wuq3.mongodb.net:27017/test?ssl=true&replicaSet=node-restapi-shop-shard-0&authSource=admin',{
 	useMongoClient : true
@@ -32,6 +33,7 @@ app.use((req,res,next)=>{
 
 app.use('/products',products);
 app.use('/orders',orders);
+app.use('/user',user);
 
 app.use((req,res,next)=>{
 	const error = new Error('Not Found!!');
