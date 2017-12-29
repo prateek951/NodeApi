@@ -3,6 +3,7 @@ const app = express();
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 //CROSS ORIGIN RESOURCE SHARING
+// added cors
 const mongoose = require('mongoose');
 
 const products = require('./api/routes/products');
