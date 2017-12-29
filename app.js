@@ -15,6 +15,7 @@ mongoose.connect('mongodb://node-shop:' + process.env.MONGO_ATLAST_PW + '@node-r
 mongoose.Promise = global.Promise;
 
 app.use(morgan('dev'));
+app.use('/uploads',express.static('uploads'));
 app.use(bodyParser.urlencoded({extended : false}));
 app.use(bodyParser.json());
 
