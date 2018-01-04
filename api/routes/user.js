@@ -71,7 +71,7 @@ router.post('/login',(req, res, next) => {
 				});
 
 				return res.status(200).json({
-					message : 'Auth successful'
+					message : 'Auth successful',
 					token : token
 				})
 			}
@@ -80,12 +80,9 @@ router.post('/login',(req, res, next) => {
 				message : 'Auth failed'
 			});
 		})
-
-
 	})
+});
 
-
-})
 
 router.delete('/:userId',(req,res,next)=>{
 	User.remove({_id : req.body.userId})
