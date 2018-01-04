@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
 const multer = require('multer');
+const checkAuth = require('../middleware/check-auth');
 
 const storage = multer.diskStorage({
 	destination: function(req,file,cb){
@@ -48,7 +49,7 @@ router.get('/',(req,res,next)=>{
 					name : result.name,
 					price : result.price,
 					_id : result._id,
-					productImage : result.productImage
+					productImage : result.productImage,
 					url : {
 						type : 'GET',
 						url : 'http://localhost:3999/products/'+result._id
@@ -70,8 +71,7 @@ router.get('/',(req,res,next)=>{
 
 });
 //ADD A PRODUCT TO THE SHOPPPING CART
-router.post('/',upload.single('productImage'),(req,res,next)=>{
-
+router.post('/', upload.single('productImage'),checkAuth,(req,res,next)=>{
 	console.log(req.file);
 	//create the product instance with the details that the client provided
 	const product = new Product({

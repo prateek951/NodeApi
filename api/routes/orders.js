@@ -24,7 +24,7 @@ router.get('/',(req,res,next)=>{
 						url : 'http://localhost:3999/orders/'+doc._id
 					}
 				}
-			});
+			})
 		}))
 		.catch(err => res.status(500).json({
 			error : err
