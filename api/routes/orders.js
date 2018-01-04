@@ -1,12 +1,12 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
-
+const checkAuth = require('../middleware/check-auth');
 const Order = require('../models/order');
 const Product = require('../models/product');
 
 //retrieve the list of all the orders
-router.get('/',(req,res,next)=>{
+router.get('/',checkAuth,(req,res,next)=>{
 	Order.find({})
 		//to send only the specific parts and not __v
 		.select('product quantity _id')
@@ -32,7 +32,7 @@ router.get('/',(req,res,next)=>{
 });
 
 //CREATING AN ORDER
-router.post('/',(req,res,next)=>{
+router.post('/',checkAuth,(req,res,next)=>{
 
 	Product.findById(req.body.productId)
 		.then(product => {
@@ -76,7 +76,7 @@ router.post('/',(req,res,next)=>{
 		});
 });
 //FETCH A SPECIFIC ORDER
-router.get('/:orderId',(req,res,next)=>{
+router.get('/:orderId',checkAuth,(req,res,next)=>{
 
 	//get information about the individual order
 	const id = req.params.orderId;
@@ -106,7 +106,7 @@ router.get('/:orderId',(req,res,next)=>{
 });
 
 //DELETE THE ORDER
-router.delete('/:orderId',(req,res,next)=>{
+router.delete('/:orderId',checkAuth,(req,res,next)=>{
 
 	//deleting the order we want to delete
 	Order.remove({_id : req.params.orderId}).exec()
@@ -124,6 +124,6 @@ router.delete('/:orderId',(req,res,next)=>{
 			});
 		}).catch(err => res.status(500).json({
 			error : err
-		});
-})
+		})
+});
 module.exports = router;

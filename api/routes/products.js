@@ -71,7 +71,7 @@ router.get('/',(req,res,next)=>{
 
 });
 //ADD A PRODUCT TO THE SHOPPPING CART
-router.post('/', upload.single('productImage'),checkAuth,(req,res,next)=>{
+router.post('/', checkAuth, upload.single('productImage'),(req,res,next)=>{
 	console.log(req.file);
 	//create the product instance with the details that the client provided
 	const product = new Product({
@@ -133,7 +133,7 @@ router.get('/:productId',(req,res,next)=>{
 
 //PATCH REQUEST TO UPDATE A PART OF SOME PRODUCT
 
-router.patch('/:id',(req,res,next)=>{
+router.patch('/:id',checkAuth,(req,res,next)=>{
 	
 	//Simple object keeps track of the update operations
 	const updateOps  = {};
@@ -162,7 +162,7 @@ router.patch('/:id',(req,res,next)=>{
 
 //DELETE THE PRODUCT WITH SPECIFIC ID
 
-router.delete('/:id',(req,res,next)=>{
+router.delete('/:id',checkAuth,(req,res,next)=>{
 	const id = req.params.id
 	Product.remove({_id : id}).exec().then(result => {
 		console.log(result);
