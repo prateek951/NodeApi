@@ -1,25 +1,20 @@
 const mongoose = require('mongoose');
 const orderSchema = mongoose.Schema({
-	//Unique id per order 
+
 	_id : mongoose.Schema.Types.ObjectId,
+
 	product : {
 		type : mongoose.Schema.Types.ObjectId,
-		ref: 'Product',
-		required : true
-	}
-	name : {
-		type : String,
+		ref : 'Product',
 		required : true
 	},
 	quantity : {
 		type : Number,
-		default : 1 //Assuming atleast one order will be placed
+		default : 1
 	}
-	price : {
-		type : Number,
-		required : true
-	}
+
 
 });
 
+//export the orders model
 module.exports = mongoose.model('Order',orderSchema);

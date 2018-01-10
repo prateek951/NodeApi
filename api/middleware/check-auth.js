@@ -1,3 +1,6 @@
+//author - Prateek Madaan
+//context -setting the token
+
 const jwt = require('jsonwebtoken');
 
 module.exports = (req, res, next) => {
@@ -9,7 +12,7 @@ module.exports = (req, res, next) => {
         req.userData = decoded;   
         next();
     }
-    catch(err) {
+    catch(error) {
         return res.status(401).json({
             message : 'Auth failed'
         })

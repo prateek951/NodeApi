@@ -1,18 +1,12 @@
-///This is how a user should look like
-
+// How our user should look like in the application
 const mongoose = require('mongoose');
-
-//create the user schema
-
 const userSchema = mongoose.Schema({
-	
-	// What are the credentials that 
-	// I require for the user
-	_id : mongoose.Schema.Types.ObjectID,
-	email : {
+	_id : mongoose.Schema.Types.ObjectId,
+	email: {
 		type : String,
 		required : true,
 		unique : true,
+		match: /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/
 	},
 	password : {
 		type : String,
@@ -20,6 +14,5 @@ const userSchema = mongoose.Schema({
 	}
 });
 
-// create the mongoose model and export it
-
+//export the user model
 module.exports = mongoose.model('User',userSchema);
